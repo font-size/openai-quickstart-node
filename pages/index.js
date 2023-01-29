@@ -9,7 +9,7 @@ export default function Home() {
   async function onSubmit(event) {
     event.preventDefault();
     try {
-      const response = await fetch("/api/generate", {
+      const response = await fetch("/ai/api/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,11 +35,12 @@ export default function Home() {
     <div>
       <Head>
         <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/dog.png" />
+        <link rel="icon" href="/ai/dog.png" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
+        <img src="/ai/dog.png" className={styles.icon} />
+        <p>I am your assistant, and helpful, creative, clever, and friendly</p>
         <h3>Type your questions</h3>
         <form onSubmit={onSubmit}>
           <textarea
@@ -50,7 +51,7 @@ export default function Home() {
             value={animalInput}
             onChange={(e) => setAnimalInput(e.target.value)}
           />
-          <input type="submit" value="ask AI" />
+          <input type="submit" value="ask me" />
         </form>
         <div className={styles.result}>{result}</div>
       </main>
