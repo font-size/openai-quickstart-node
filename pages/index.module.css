@@ -28,6 +28,7 @@
 }
 .main .icon {
   width: 34px;
+  height: 34px;
 }
 .main h3 {
   font-size: 32px;
@@ -63,5 +64,27 @@
 }
 .main .result {
   font-weight: bold;
+  
+}
+.main .qa {
+  margin-bottom: 40px;
+  height: 500px;
+  overflow-y: auto;
+}
+.main .human, .main .ai {
+  display: flex;
   margin-top: 40px;
+  align-items: center;
+  width: 350px;
+}
+
+.main .human {
+  justify-content: right;
+}
+
+.main .human .icon{
+  padding-left: 10px;
+}
+.main .ai .icon{
+  padding-right: 10px;
 }

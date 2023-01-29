@@ -16,8 +16,9 @@ export default async function (req, res) {
     return;
   }
 
-  const animal = req.body.animal || '';
-  if (animal.trim().length === 0) {
+  const question = req.body.question || '';
+  const beforeMessage = req.body.beforeMessage || '';
+  if (question.trim().length === 0) {
     res.status(400).json({
       error: {
         message: "Please enter words",
@@ -29,11 +30,9 @@ export default async function (req, res) {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(animal),
-      model:"text-davinci-003",
-      temperature:0.9,
-      max_tokens:150,
-      top_p:1,
+      prompt: generatePrompt(question, beforeMessage),
+      max_tokens: 512,
+      top_p: 1,
       frequency_penalty:0.0,
       presence_penalty:0.6,
       stop:[" Human:", " AI:"],
@@ -55,13 +54,10 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(animal) {
+function generatePrompt(question, beforeMessage) {
   const capitalizedAnimal =
-    animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-  return `The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and friendly.
-
-Human: Hello, who are you?
-AI: I am an AI created by OpenAI. How can I help you today?
+  question[0].toUpperCase() + question.slice(1).toLowerCase();
+  return `${beforeMessage}
 Human: ${capitalizedAnimal}
 AI:`
 }
