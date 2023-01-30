@@ -8,7 +8,7 @@ let disabled = false;
 // let messageList = [];
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
+  const [messageInput, setmessageInput] = useState("");
   const [result, setResult] = useState();
   // 用于操作聊天列表元素的引用
 
@@ -27,12 +27,19 @@ export default function Home() {
     }
   }
 
+  function onClear() {
+    window.location.href = '/ai';
+  }
+
   async function onSubmit(event) {
     if (disabled){
+      event.preventDefault();
       return;
     }
     disabled = true;
-    messageList.push(animalInput);
+    messageList.push(messageInput);
+    setmessageInput("");
+
     setTimeout(()=> {
       scrollToBottom();
     }, 100)
@@ -43,7 +50,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ question: animalInput, beforeMessage }),
+        body: JSON.stringify({ question: messageInput, beforeMessage }),
       });
      
       const data = await response.json();
@@ -54,7 +61,7 @@ export default function Home() {
       setResult(data.result);
      
       beforeMessage = `${beforeMessage}
-      Human: ${animalInput}
+      Human: ${messageInput}
       AI: ${data.result}
       `
       
@@ -64,7 +71,7 @@ export default function Home() {
       }, 100)
       console.log('messageList: ', messageList);
       
-      setAnimalInput("");
+      setmessageInput("");
       disabled = false;
     } catch(error) {
       // Consider implementing your own error handling logic here
@@ -75,14 +82,10 @@ export default function Home() {
   }
 
   const qa = messageList.map((item, index) => {
-    console.log('index: ', index);
-      let line_style = '';
       if (index % 2 !== 0) {
-        line_style = 'ai';
-        return  <div className={styles.ai}><img src="/ai/dog.png" className={styles.icon} /> <div className={styles.result}  key={index}>{item}</div></div>   
+        return  <div className={styles.ai}  key={index}><img src="/ai/dog.png" className={styles.icon} /> <div className={styles.result} >{item}</div></div>   
       } else {
-        line_style = 'human';
-        return  <div className={styles.human}><div className={styles.result}  key={index}>{item}</div><img src="/ai/me.jpg" className={styles.icon} /> </div>   
+        return  <div className={styles.human}  key={index}><div className={styles.result}  >{item}</div><img src="/ai/me.jpg" className={styles.icon} /> </div>   
       }
       
   })
@@ -90,26 +93,26 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>OpenAI Quickstart</title>
+        <title>AI聊天室</title>
         <link rel="icon" href="/ai/dog.png" />
       </Head>
 
       <main className={styles.main}>
-       
-        <p>我是来自OpenAI的ChatGPT机器人，我会知无不言</p>
-       
+        <span className={styles.clear} onClick={onClear}>清空当前聊天</span>
         <div className={styles.qa}  ref={(el) => { messagesEnd = el; }}>
+          <div className={styles.ai}><img src="/ai/dog.png" className={styles.icon} /> <div className={styles.result} >你好，我是ChatGPT机器人</div></div>   
           {qa}
         </div>
-        {/* <div className={styles.result}>{result}</div> */}
+     
         <form onSubmit={onSubmit}>
+       
           <textarea
             type="text"
-            rows="5"
-            name="animal"
+            rows="3"
+            name="question"
             placeholder="Enter words"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            value={messageInput}
+            onChange={(e) => setmessageInput(e.target.value)}
           />
           <input type="submit" value="发 送" />
         </form>
