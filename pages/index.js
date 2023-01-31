@@ -112,7 +112,7 @@ export default function Home() {
             type="text"
             rows="3"
             name="question"
-            placeholder="Enter words"
+            placeholder="你想说什么？"
             value={messageInput}
             onChange={(e) => setmessageInput(e.target.value)}
           />

@@ -77,16 +77,22 @@
   height: calc(100vh - 280px);
   overflow-y: auto;
   width: 95%;
+  display: block;
   border: 1px solid #10a37f;
   border-radius: 4px;
 }
-.main .human, .main .ai {
+.main .human {
   display: flex;
   /* align-items: center; */
   width: 95%;
   margin: 20px auto;
 }
-
+.main .ai {
+  display: flex;
+  /* align-items: center; */
+  width: 95%;
+  margin: 20px auto;
+}
 .main .human {
   justify-content: right;
   color: #10a37f;
