@@ -105,14 +105,12 @@
   display: flex;
   align-self:flex-start;
   padding-left: 20px;
+  margin-top: -20px;
 }
 .main .clear {
-  padding: 6px 0;
-  color: #fff;
-  background-color: #a3104b;
-  border: none;
-  border-radius: 4px;
-  text-align: center;
+  color: #a3104b;
   cursor: pointer;
   width: 120px;
+  font-size: 14px;
+  text-decoration: underline;
 }
