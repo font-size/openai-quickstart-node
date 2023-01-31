@@ -24,8 +24,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-  position: relative;
+  /* height: 100vh;
+  position: relative; */
 }
 .main .icon {
   width: 34px;
@@ -69,6 +69,7 @@
 .main .result {
   font-weight: bold;
   padding-top: 10px;
+  font-size: 16px;
 }
 .main .qa {
   margin-bottom: 20px;
@@ -88,6 +89,7 @@
 
 .main .human {
   justify-content: right;
+  color: #10a37f;
 }
 
 .main .human .icon{
@@ -98,6 +100,11 @@
 }
 .main .inputBox {
   display: flex;
+}
+.clearBox {
+  display: flex;
+  align-self:flex-start;
+  padding-left: 20px;
 }
 .main .clear {
   padding: 6px 0;

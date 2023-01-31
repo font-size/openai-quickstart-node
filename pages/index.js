@@ -69,7 +69,7 @@ export default function Home() {
       setTimeout(()=> {
         scrollToBottom();
       }, 100)
-      console.log('messageList: ', messageList);
+      // console.log('messageList: ', messageList);
       
       setmessageInput("");
       disabled = false;
@@ -98,12 +98,14 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <span className={styles.clear} onClick={onClear}>清空当前聊天</span>
+       
         <div className={styles.qa}  ref={(el) => { messagesEnd = el; }}>
           <div className={styles.ai}><img src="/ai/dog.png" className={styles.icon} /> <div className={styles.result} >你好，我是ChatGPT机器人</div></div>   
           {qa}
         </div>
-     
+        <div className={styles.clearBox}>
+          <span className={styles.clear} onClick={onClear}>清空当前聊天</span>
+        </div>
         <form onSubmit={onSubmit}>
        
           <textarea
