@@ -10,6 +10,8 @@ let disabled = false;
 export default function Home() {
   const [messageInput, setmessageInput] = useState("");
   const [result, setResult] = useState();
+
+  const [btnValue, setBtnValye] = useState("发 送");
   // 用于操作聊天列表元素的引用
 
   let [messageList] = useState([]);
@@ -36,6 +38,7 @@ export default function Home() {
       event.preventDefault();
       return;
     }
+    setBtnValye("思考中...")
     disabled = true;
     messageList.push(messageInput);
     setmessageInput("");
@@ -72,6 +75,7 @@ export default function Home() {
       // console.log('messageList: ', messageList);
       
       setmessageInput("");
+      setBtnValye("发 送")
       disabled = false;
     } catch(error) {
       // Consider implementing your own error handling logic here
@@ -116,7 +120,7 @@ export default function Home() {
             value={messageInput}
             onChange={(e) => setmessageInput(e.target.value)}
           />
-          <input type="submit" value="发 送" />
+          <input type="submit" value={btnValue} />
         </form>
        
       </main>
