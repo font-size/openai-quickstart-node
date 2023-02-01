@@ -42,7 +42,7 @@ export default async function (req, res) {
     const nowTime = new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString();
     const chatMessage = {
       nowTime,
-      beforeMessage,
+      // beforeMessage,
       question: `${question}`,
       answer: `${completion.data.choices[0].text}`
     }
