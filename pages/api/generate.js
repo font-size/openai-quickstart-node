@@ -1,4 +1,5 @@
 import { Configuration, OpenAIApi } from "openai";
+import logger from '../../log';
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -37,6 +38,16 @@ export default async function (req, res) {
       stop:[" Human:", " AI:"],
     });
     res.status(200).json({ result: completion.data.choices[0].text });
+
+    const nowTime = new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString();
+    const chatMessage = {
+      nowTime,
+      beforeMessage,
+      question: `${question}`,
+      answer: `${completion.data.choices[0].text}`
+    }
+    logger.info(chatMessage);
+
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
